@@ -10,6 +10,8 @@ const InputLocation = () => {
     const [inputLocation, setinputLocation] = useState([]);
     const [text, setText] = useState('');
     const [suggestions, setSuggestions] = useState([]);
+
+
     
     useEffect(()=>{
         axios.get(`https://rickandmortyapi.com/api/location`)
@@ -40,7 +42,6 @@ const InputLocation = () => {
          <img className='header-img' src={header} alt="img" />
           <h1>Rick and Morty Wiki</h1> 
 
-        
             <div className='search-input'>
               <input onBlur={()=>{
                   setTimeout(() => setSuggestions([]), 100); /* sin el timeout al darle click al elemento no se seteará en el input */
@@ -55,8 +56,6 @@ const InputLocation = () => {
             </div>
             {/* <button className='search-button' onClick={getLocation}>Search</button> */}
                 <Location location={inputLocation?.[0]}/>
-                
-            
         </>          
     );
 };

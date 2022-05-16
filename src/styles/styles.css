@@ -151,6 +151,32 @@ main{
     text-align: center;
 }
 
+.pagination-container{
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 1000px;
+    margin: auto;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.pagination-item{
+    padding: 15px;
+    font-size: 1.3rem;
+    background-color: #0c4149;
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.pagination-item:hover{
+    background-color: #fff;
+    color: #000;
+}
+
 
 @media screen and (min-width:600px) {
 
