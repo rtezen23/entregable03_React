@@ -7,15 +7,12 @@ import Pagination from './Pagination';
 const Location = ({location}) => {
 
     const [searchLocation, setSearchLocation] = useState([]);
-
     const [currentPage, setCurrentPage] = useState(1);
     const [postsPerPage] = useState(8);
 
-    
     useEffect(()=>{
       if (location?.residents) setSearchLocation(location);
     },[location]);
-    
     
     useEffect(()=>{
       const random = 1 + Math.floor(Math.random()*126);
@@ -31,6 +28,26 @@ const Location = ({location}) => {
     //Change page
     const paginate = pageNumber => setCurrentPage(pageNumber);
 
+    const condition = () =>{
+      if (searchLocation.residents?.length>0) {
+         if (currentPosts?.length===0) {
+          setCurrentPage(1);
+        } 
+        return(
+          currentPosts?.map(location=>(
+            <ResidentInfo key={location} url={location}/>
+          ))
+        )
+      } else {
+        return(
+          <div className='notFound'>
+                <img src={notFound} alt=""/>
+                <h2>There are no population in this location</h2>
+              </div>
+        )
+      }
+    }
+
     return (
         <main>
           <div className='container__info'>
@@ -43,16 +60,19 @@ const Location = ({location}) => {
           </div> 
           <h2 className='h2-residents'>Residents</h2>
           <ul className='container-location'>
-            {
-            currentPosts?.length>0?  
-            currentPosts?.map(location=>(
+            <>
+              {condition()}
+            </>
+           {/*  {
+            currentPosts?.length>0?
+              currentPosts?.map(location=>(
               <ResidentInfo key={location} url={location}/>
             )):(
               <div className='notFound'>
-                <img src={notFound} alt="" srcset="" />
+                <img src={notFound} alt=""/>
                 <h2>There are no population in this location</h2>
               </div>
-            )}
+            )} */}
           </ul>
           <Pagination postsPerPage={postsPerPage} totalPosts={searchLocation.residents?.length} paginate={paginate}/>
         </main>
